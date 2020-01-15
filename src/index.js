@@ -18,13 +18,18 @@ const createWindow = () => {
   });
 
 
-  const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:8080`
-  : path.join(__dirname, 'renderer/index.html')
+  // const winURL = process.env.NODE_ENV === 'development'
+  // ? `http://localhost:8080`
+  // : path.join(__dirname, 'renderer/index.html')
 
   // and load the index.html of the app.
   // mainWindow.loadFile(winURL);
-  mainWindow.loadURL(winURL);
+  
+  if(process.env.NODE_ENV === 'development'){
+    mainWindow.loadURL('http://localhost:8080');
+  }else {
+    mainWindow.loadFile(path.join(__dirname, 'renderer/index.html'));
+  }
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

@@ -1,38 +1,18 @@
 <template>
   <div class="page page-note">
-    <div class="page-header">
-      <button class="btn btn-primary">新笔记</button>
-      <button class="btn">新笔记</button>
-    </div>
-    <div class="page-body">
-      <div class="list note-list">
-        <ul>
-          <li
-            v-for="note in notes"
-            v-bind:key="note.id"
-            class="item"
-            @click="handleNote(note.number)"
-          >
-            <p class="title">
-              {{ note.title }}
-            </p>
-            <div class="content">{{ note.body }}</div>
-            <div class="date">{{ note.created_at }}</div>
-          </li>
-        </ul>
-      </div>
-      <div class="note-edit">
-        <input
-          class="form-input"
-          type="text"
-          v-model="note.title"
-          @change="handleChange"
-        />
-        <textarea
-          class="form-area"
-          v-model="note.body"
-          @change="handleChange"
-        ></textarea>
+    <div class="list note-list">
+      <ul>
+        <li v-for="note in notes" v-bind:key="note.id" class="item">
+          <p class="title" @click="handleLook(note.number)">
+            {{ note.title }}
+          </p>
+          <div class="content">{{ note.body }}</div>
+          <div class="date">{{ note.created_at }}</div>
+          <div class="action"><a @click="handleEdit(note.number)">编辑</a></div>
+        </li>
+      </ul>
+      <div class="load-more" v-if="!isLoadOver">
+        <button class="btn" @click="handleLoad">加载更多</button>
       </div>
     </div>
   </div>
@@ -44,40 +24,40 @@ import noteApi from "@/api/note";
 export default {
   name: "NoteList",
   created: function() {
-    noteApi.getList().then(res => {
-      const notes = res.data;
-      this.notes = notes;
-      this.getNote(notes[0].number);
-    });
+    this.getNotes();
   },
   methods: {
     handleSave() {
       console.log("save");
     },
-    handleNote(number) {
-      this.getNote(number);
+    handleEdit(number) {
+      this.$router.push(`/note/edit/${number}`);
     },
-    handleChange() {
-      const { note, number } = this;
-      noteApi.editNote(number, note).then(res => {
-        console.log(res);
-      });
+    handleLook(number) {
+      this.$router.push(`/note/detail/${number}`);
     },
-    getNote(number) {
-      this.number = number;
-      noteApi.getDetail(number).then(res => {
-        const data = res.data;
-        this.note = { title: data.title, body: data.body };
+    handleLoad() {
+      this.page = this.page + 1;
+      this.getNotes();
+    },
+    getNotes() {
+      const page = this.page;
+      const size = 2;
+      noteApi.getList(page,size).then(res => {
+        const newNotes = res.data;
+        const oldNotes = this.notes;
+        if (newNotes.length <= 0) {
+          this.isLoadOver = true;
+        }
+        this.notes = oldNotes.concat(newNotes);
       });
     }
   },
   data() {
     return {
       notes: [],
-      note: {
-        title: "",
-        body: ""
-      }
+      page: 1,
+      isLoadOver: false
     };
   }
 };

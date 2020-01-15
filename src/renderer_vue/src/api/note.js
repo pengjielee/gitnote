@@ -11,9 +11,9 @@ const config = {
 };
 
 export default {
-  getList() {
+  getList(page,size = 10) {
     // page=1&per_page=3
-    return axios.get(`${baseUrl}/issues`);
+    return axios.get(`${baseUrl}/issues?page=${page}&per_page=${size}`);
   },
   getDetail(number) {
     return axios.get(`${baseUrl}/issues/${number}`);

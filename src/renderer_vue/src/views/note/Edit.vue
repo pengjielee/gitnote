@@ -44,25 +44,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.note-edit {
-  font-size: 16px;
-}
-.note-edit input,
-.note-edit textarea {
-  width: 100%;
-  padding: 8px;
-  outline: none;
-  font-size: 14px;
-  resize: vertical;
-}
-.note-edit .form-area {
-  /*height: calc(100% - 50px);*/
-}
-.note-edit .btn {
-  width: 100%;
-  padding: 10px 0;
-  height: 40px;
-}
-</style>

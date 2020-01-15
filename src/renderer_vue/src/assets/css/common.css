@@ -23,9 +23,10 @@
 
 #app .main {
   flex: 1 1 100%;
+  padding: 30px;
 }
 #app .sidebar {
-  width: 130px;
+  width: 230px;
   display: flex;
   flex-direction: column;
   background: #f5f5f5;

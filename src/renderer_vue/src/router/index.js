@@ -31,7 +31,7 @@ const routes = [
     component: NoteAdd
   },
   {
-    path: "/note/edit",
+    path: "/note/edit/:number",
     name: "noteEdit",
     component: NoteEdit
   },

@@ -1,38 +1,36 @@
 <template>
-  <div class="note-add">
-    <h1>This is an note add page</h1>
-    <textarea></textarea>
-    <button class="btn" @click="handleSave">保存</button>
+  <div class="note-edit">
+    <div class="form-group">
+      <input type="text" class="form-input" v-bind="note.title" />
+    </div>
+    <div class="form-group form-area">
+      <textarea class="textarea" v-bind="note.content"></textarea>
+    </div>
+    <button class="btn btn-primary" @click="handleSave">保存</button>
   </div>
 </template>
 
 <script>
+import noteApi from "@/api/note";
+
 export default {
   name: "NoteAdd",
   methods: {
     handleSave() {
-      console.log("save");
+      const self = this;
+      const note = self.note;
+      noteApi.addNote(note).then(res => {
+        console.log(res);
+      });
     }
+  },
+  data() {
+    return {
+      note: {
+        title: "",
+        body: ""
+      }
+    };
   }
 };
 </script>
-
-<style scoped>
-.note-add {
-  padding: 20px;
-}
-.note-add textarea {
-  width: 100%;
-  height: 100px;
-  resize: none;
-}
-.note-add .btn {
-  width: 100%;
-  padding: 10px 0;
-  height: 40px;
-  border: none;
-  background: #eee;
-  color: #333;
-  margin: 10px 0;
-}
-</style>

@@ -1,7 +1,9 @@
 <template>
   <div class="note-detail">
     <h3 class="title">{{ note.title }}</h3>
-    <div class="content"><pre>{{ note.body }}</pre></div>
+    <div class="content">
+      <pre>{{ note.body }}</pre>
+    </div>
   </div>
 </template>
 

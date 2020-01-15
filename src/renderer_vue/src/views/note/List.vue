@@ -1,33 +1,39 @@
 <template>
   <div class="page page-note">
-    <div class="list note-list">
-      <ul>
-        <li
-          v-for="note in notes"
-          v-bind:key="note.id"
-          class="item"
-          @click="handleNote(note.number)"
-        >
-          <p class="title">
-            {{ note.title }}
-          </p>
-          <div class="content">{{ note.body }}</div>
-          <div class="date">{{ note.created_at }}</div>
-        </li>
-      </ul>
+    <div class="page-header">
+      <button class="btn btn-primary">新笔记</button>
+      <button class="btn">新笔记</button>
     </div>
-    <div class="note-edit">
-      <input
-        class="form-input"
-        type="text"
-        v-model="note.title"
-        @change="handleChange"
-      />
-      <textarea
-        class="form-area"
-        v-model="note.body"
-        @change="handleChange"
-      ></textarea>
+    <div class="page-body">
+      <div class="list note-list">
+        <ul>
+          <li
+            v-for="note in notes"
+            v-bind:key="note.id"
+            class="item"
+            @click="handleNote(note.number)"
+          >
+            <p class="title">
+              {{ note.title }}
+            </p>
+            <div class="content">{{ note.body }}</div>
+            <div class="date">{{ note.created_at }}</div>
+          </li>
+        </ul>
+      </div>
+      <div class="note-edit">
+        <input
+          class="form-input"
+          type="text"
+          v-model="note.title"
+          @change="handleChange"
+        />
+        <textarea
+          class="form-area"
+          v-model="note.body"
+          @change="handleChange"
+        ></textarea>
+      </div>
     </div>
   </div>
 </template>

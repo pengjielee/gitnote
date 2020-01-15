@@ -1,6 +1,15 @@
-.page-note{
+.page-note .page-header{
+  height: 55px;
+  padding: 0 30px;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+.page-note .page-header .btn{
+  padding: 10px;
+}
+.page-note .page-body{
   display: flex;
-  height: 100%;
+  height: calc(100% - 55px);
 }
 .page-note .note-list {
   width: 300px;

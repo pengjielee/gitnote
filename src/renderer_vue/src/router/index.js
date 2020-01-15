@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Setting from "../views/Setting.vue";
+import Help from "../views/Help.vue";
 
 import NoteList from "../views/note/List.vue";
 import NoteAdd from "../views/note/Add.vue";
@@ -34,6 +36,16 @@ const routes = [
     path: "/note/edit/:number",
     name: "noteEdit",
     component: NoteEdit
+  },
+  {
+    path: "/setting",
+    name: "setting",
+    component: Setting
+  },
+  {
+    path: "/help",
+    name: "help",
+    component: Help
   },
   {
     path: "/about",

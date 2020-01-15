@@ -1,17 +1,34 @@
 <template>
-  <div class="list note-list">
-    <ul>
-      <li v-for="note in notes" v-bind:key="note.id" class="item">
-        <h3 @click="handleJumpToNoteDetail(note.number)" class="title">
-          {{ note.title }}
-        </h3>
-        <p>{{ note.url }}</p>
-        <p>{{ note.number }}</p>
-        <p>{{ note.created_at }}</p>
-        <p>{{ note.html_url }}</p>
-        <p @click="handleJumpToNoteEdit(note.number)">edit</p>
-      </li>
-    </ul>
+  <div class="page page-note">
+    <div class="list note-list">
+      <ul>
+        <li
+          v-for="note in notes"
+          v-bind:key="note.id"
+          class="item"
+          @click="handleNote(note.number)"
+        >
+          <p class="title">
+            {{ note.title }}
+          </p>
+          <div class="content">{{ note.body }}</div>
+          <div class="date">{{ note.created_at }}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="note-edit">
+      <input
+        class="form-input"
+        type="text"
+        v-model="note.title"
+        @change="handleChange"
+      />
+      <textarea
+        class="form-area"
+        v-model="note.body"
+        @change="handleChange"
+      ></textarea>
+    </div>
   </div>
 </template>
 
@@ -21,25 +38,40 @@ import noteApi from "@/api/note";
 export default {
   name: "NoteList",
   created: function() {
-    const self = this;
     noteApi.getList().then(res => {
-      self.notes = res.data;
+      const notes = res.data;
+      this.notes = notes;
+      this.getNote(notes[0].number);
     });
   },
   methods: {
     handleSave() {
       console.log("save");
     },
-    handleJumpToNoteEdit(number) {
-      this.$router.push(`/note/edit/${number}`);
+    handleNote(number) {
+      this.getNote(number);
     },
-    handleJumpToNoteDetail(number) {
-      this.$router.push(`/note/detail/${number}`);
+    handleChange() {
+      const { note, number } = this;
+      noteApi.editNote(number, note).then(res => {
+        console.log(res);
+      });
+    },
+    getNote(number) {
+      this.number = number;
+      noteApi.getDetail(number).then(res => {
+        const data = res.data;
+        this.note = { title: data.title, body: data.body };
+      });
     }
   },
   data() {
     return {
-      notes: []
+      notes: [],
+      note: {
+        title: "",
+        body: ""
+      }
     };
   }
 };

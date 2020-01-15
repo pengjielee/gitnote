@@ -1,5 +1,54 @@
+.page-note{
+  display: flex;
+  height: 100%;
+}
+.page-note .note-list {
+  width: 300px;
+  border-right: 1px solid #ddd;
+}
+.page-note .note-edit{
+  flex: 1 1 100%;
+}
+
+.note-edit .form-input {
+  width: 100%;
+  padding: 30px;
+  border: none;
+  outline: none;
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+  font-size: 20px;
+}
+.note-edit .form-area{
+  width: 100%;
+  background: #fff;
+  border: none;
+  padding: 30px;
+  min-height: 500px;
+  height: calc(100% - 60px);
+  outline: none;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+
+.note-list {
+  font-size: 16px;
+}
+.note-list .item {
+  padding: 15px 20px;
+  cursor: pointer;
+}
 .note-list .title {
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.note-list .content {
+  padding: 5px 0;
+}
+.note-list .date {
+  font-size: 14px;
+  color: #666;
 }
 
 .note-detail .title {
@@ -7,23 +56,4 @@
 }
 .note-detail .content {
   font-size: 16px;
-}
-
-.note-edit {
-  font-size: 16px;
-}
-.note-edit input, .note-edit textarea{
-  width: 100%;
-  padding: 8px;
-  outline:none;
-  font-size: 14px;
-  resize: vertical;
-}
-.note-edit .form-area {
-  height: calc(100% - 50px);
-}
-.note-edit .btn {
-  width: 100%;
-  padding: 10px 0;
-  height: 40px;
 }

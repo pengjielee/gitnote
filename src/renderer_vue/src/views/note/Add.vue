@@ -1,10 +1,10 @@
 <template>
   <div class="note-edit">
     <div class="form-group">
-      <input type="text" class="form-input" v-bind="note.title" />
+      <input type="text" class="form-input" v-model="note.title" />
     </div>
     <div class="form-group form-area">
-      <textarea class="textarea" v-bind="note.content"></textarea>
+      <textarea class="textarea" v-model="note.body"></textarea>
     </div>
     <button class="btn btn-primary" @click="handleSave">保存</button>
   </div>

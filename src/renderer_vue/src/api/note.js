@@ -1,32 +1,27 @@
 import axios from "axios";
-import qs from "qs";
+
+const baseUrl = "https://api.github.com/repos/pengjielee/test";
+
+const token = "4f4216d2189649324bfc5e3c4551900d54ec2577";
+
+const config = {
+  headers: {
+    Authorization: `token ${token}`
+  }
+};
 
 export default {
   getList() {
     // page=1&per_page=3
-    return axios.get(`https://api.github.com/repos/pengjielee/test/issues`);
+    return axios.get(`${baseUrl}/issues`);
   },
   getDetail(number) {
-    return axios.get(
-      `https://api.github.com/repos/pengjielee/test/issues/${number}`
-    );
+    return axios.get(`${baseUrl}/issues/${number}`);
   },
   addNote(data) {
-    return axios.post(
-      `https://api.github.com/repos/pengjielee/test/issues`,
-      qs.stringify(data)
-    );
+    return axios.post(`${baseUrl}/issues`, data, config);
   },
   editNote(number, data) {
-    console.log(data);
-    return axios.patch(
-      `https://api.github.com/repos/pengjielee/test/issues/${number}`,
-      data,
-      {
-        headers: {
-          Authorization: "token 4f4216d2189649324bfc5e3c4551900d54ec2577"
-        }
-      }
-    );
+    return axios.patch(`${baseUrl}/issues/${number}`, data, config);
   }
 };

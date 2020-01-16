@@ -28,5 +28,8 @@ export default {
   },
   getTags() {
     return axios.get(`${baseUrl}/labels`, config);
+  },
+  upload(name, data) {
+    return axios.put(`${baseUrl}/contents/images/${name}`, data, config);
   }
 };

@@ -9,6 +9,7 @@ import NoteAdd from "../views/note/Add.vue";
 import NoteEdit from "../views/note/Edit.vue";
 import NoteDetail from "../views/note/Detail.vue";
 import NoteTags from "../views/note/Tags.vue";
+import NoteUpload from "../views/note/Upload.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/note/tags",
     name: "noteTags",
     component: NoteTags
+  },
+  {
+    path: "/note/upload",
+    name: "noteUpload",
+    component: NoteUpload
   },
   {
     path: "/note/detail/:number",

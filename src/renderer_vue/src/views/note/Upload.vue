@@ -31,7 +31,7 @@ export default {
         noteApi
           .upload(file.name, { message: "upload image", content: content })
           .then(function(res) {
-            if(res.status === 201){
+            if (res.status === 201) {
               swal("上传成功", "", "success");
             }
           });

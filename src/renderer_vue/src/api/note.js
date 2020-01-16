@@ -29,6 +29,9 @@ export default {
   getTags() {
     return axios.get(`${baseUrl}/labels`, config);
   },
+  getImages() {
+    return axios.get(`${baseUrl}/contents/images`, config);
+  },
   upload(name, data) {
     return axios.put(`${baseUrl}/contents/images/${name}`, data, config);
   }

@@ -76,6 +76,16 @@ body {
   margin-left: 0.1rem;
 }
 
+.media {
+  display: table;
+  width: 100%;
+}
+.media .media-left,
+.media .media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
 .textarea {
   width: 100%;
   background: #eff1f5;

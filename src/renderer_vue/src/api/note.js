@@ -11,7 +11,7 @@ const config = {
 };
 
 export default {
-  getList(page,size = 10) {
+  getList(page, size = 10) {
     // page=1&per_page=3
     return axios.get(`${baseUrl}/issues?page=${page}&per_page=${size}`);
   },

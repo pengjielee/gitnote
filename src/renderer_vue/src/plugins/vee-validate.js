@@ -8,25 +8,7 @@ const dictionary = {
       required: field => "请填写" + field
     },
     attributes: {
-      dining_num: "用餐人数",
-      trip_mobile: "行中联系电话",
-      meal_start_time: "开始时间",
-      meal_end_time: "结束时间",
-      seat: "座位倾向",
-      date: "使用日期",
-      insure: "旅行保险信息",
-      safe_name: "保险公司",
-      safe_code: "保险单号",
-      lastname_cn: "中文姓",
-      firstname_cn: "中文名",
-      lastname_en: "拼音/英文姓",
-      firstname_en: "拼音/英文名",
-      papers_no: "护照号",
-      papers_time: "护照有效期",
-      mobile_code: "区号",
-      mobile: "手机号",
-      email: "邮箱",
-      remark: "补充说明"
+      title: "标题"
     }
   }
 };

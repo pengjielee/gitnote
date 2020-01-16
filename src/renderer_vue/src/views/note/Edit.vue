@@ -1,7 +1,16 @@
 <template>
   <div class="page note-edit">
     <div class="form-group">
-      <input class="form-input" type="text" v-model="note.title" />
+      <input
+        class="form-input"
+        type="text"
+        v-model="note.title"
+        name="title"
+        v-validate="'required'"
+      />
+      <div v-show="errors.has('title')" class="form-error">
+        {{ errors.first("title") }}
+      </div>
     </div>
     <div class="form-group form-area">
       <textarea class="textarea" v-model="note.body"></textarea>
@@ -12,6 +21,7 @@
 
 <script>
 import noteApi from "@/api/note";
+import swal from "sweetalert";
 
 export default {
   name: "NoteEdit",
@@ -26,11 +36,16 @@ export default {
   },
   methods: {
     handleSave() {
-      const self = this;
-      const note = self.note;
-      const number = self.number;
-      noteApi.editNote(number, note).then(res => {
-        console.log(res);
+      this.$validator.validate().then(async result => {
+        if (!result) {
+          return false;
+        }
+        const note = this.note;
+        const number = this.number;
+        noteApi.editNote(number, note).then(res => {
+          console.log(res);
+          swal("保存成功");
+        });
       });
     }
   },

@@ -11,8 +11,11 @@
           <div class="action"><a @click="handleEdit(note.number)">编辑</a></div>
         </li>
       </ul>
-      <div class="load-more" v-if="!isLoadOver">
-        <button class="btn" @click="handleLoad">加载更多</button>
+      <div class="load-more" v-if="showLoadMore">
+        <button class="btn" @click="handleLoad" v-if="!isLoadOver">
+          加载更多
+        </button>
+        <p class="info" v-else>没有更多了</p>
       </div>
     </div>
   </div>
@@ -41,13 +44,18 @@ export default {
       this.getNotes();
     },
     getNotes() {
+      const self = this;
       const page = this.page;
       const size = 2;
-      noteApi.getList(page,size).then(res => {
+      noteApi.getList(page, size).then(res => {
         const newNotes = res.data;
         const oldNotes = this.notes;
         if (newNotes.length <= 0) {
           this.isLoadOver = true;
+          this.timer = setTimeout(function() {
+            self.showLoadMore = false;
+            clearTimeout(self.timer);
+          }, 3000);
         }
         this.notes = oldNotes.concat(newNotes);
       });
@@ -57,7 +65,8 @@ export default {
     return {
       notes: [],
       page: 1,
-      isLoadOver: false
+      isLoadOver: false,
+      showLoadMore: true
     };
   }
 };

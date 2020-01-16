@@ -20,12 +20,11 @@ body {
   display: inline-block;
   background: #ededed;
   cursor: pointer;
-  border-radius: 0.1rem;
+  border-radius: 5px;
   color: #666;
-  font-size: 0.32rem;
-  line-height: 0.9rem;
-  padding: 0 0.3rem;
-  margin: 0.3rem 0;
+  font-size: 16px;
+  padding: 0 15px;
+  margin: 20px 0;
   border: none;
   text-align: center;
   outline: none;

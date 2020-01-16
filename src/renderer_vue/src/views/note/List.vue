@@ -1,6 +1,11 @@
 <template>
-  <div class="page page-note">
-    <div class="list note-list">
+  <div class="page note-list">
+    <div class="page-header">
+      <button class="btn btn-sort" @click="handleSort">
+        {{ directionName }}排列
+      </button>
+    </div>
+    <div class="list">
       <ul>
         <li v-for="note in notes" v-bind:key="note.id" class="item">
           <p class="title" @click="handleLook(note.number)">
@@ -16,7 +21,7 @@
           <div class="action"><a @click="handleEdit(note.number)">编辑</a></div>
         </li>
       </ul>
-      <div class="load-more" v-if="showLoadMore">
+      <div class="load-more">
         <button class="btn" @click="handleLoad" v-if="!isLoadOver">
           加载更多
         </button>
@@ -34,7 +39,25 @@ export default {
   created: function() {
     this.getNotes();
   },
+  computed: {
+    directionName: function() {
+      return this.search.direction === "asc" ? "升序" : "降序";
+    }
+  },
   methods: {
+    handleSort() {
+      let direction = "";
+      if (this.search.direction === "asc") {
+        direction = "desc";
+      } else {
+        direction = "asc";
+      }
+      this.search.direction = direction;
+      this.notes = [];
+      this.search.page = 1;
+      this.isLoadOver = false;
+      this.getNotes();
+    },
     handleSave() {
       console.log("save");
     },
@@ -45,22 +68,16 @@ export default {
       this.$router.push(`/note/detail/${number}`);
     },
     handleLoad() {
-      this.page = this.page + 1;
+      this.search.page = this.search.page + 1;
       this.getNotes();
     },
     getNotes() {
-      const self = this;
-      const page = this.page;
-      const size = 20;
-      noteApi.getList(page, size).then(res => {
+      const { page, size, direction } = this.search;
+      noteApi.getList(page, size, direction).then(res => {
         const newNotes = res.data;
         const oldNotes = this.notes;
         if (newNotes.length <= 0) {
           this.isLoadOver = true;
-          this.timer = setTimeout(function() {
-            self.showLoadMore = false;
-            clearTimeout(self.timer);
-          }, 3000);
         }
         this.notes = oldNotes.concat(newNotes);
       });
@@ -69,9 +86,12 @@ export default {
   data() {
     return {
       notes: [],
-      page: 1,
-      isLoadOver: false,
-      showLoadMore: true
+      search: {
+        page: 1,
+        size: 2,
+        direction: "desc"
+      },
+      isLoadOver: false
     };
   }
 };

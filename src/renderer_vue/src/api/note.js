@@ -11,12 +11,14 @@ const config = {
 };
 
 export default {
-  getList(page, size = 10) {
-    // page=1&per_page=3
-    return axios.get(`${baseUrl}/issues?page=${page}&per_page=${size}`);
+  getList(page, size = 10, direction = "desc") {
+    return axios.get(
+      `${baseUrl}/issues?page=${page}&per_page=${size}&direction=${direction}`,
+      config
+    );
   },
   getDetail(number) {
-    return axios.get(`${baseUrl}/issues/${number}`);
+    return axios.get(`${baseUrl}/issues/${number}`, config);
   },
   addNote(data) {
     return axios.post(`${baseUrl}/issues`, data, config);

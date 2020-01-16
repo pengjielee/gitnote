@@ -48,6 +48,13 @@
   color: #666;
   margin: 10px 0;
 }
+.note-list .page-header{
+  border-bottom: 1px solid #ddd;
+}
+.note-list .page-header .btn-sort{
+  width: 100px;
+  height: 30px;
+}
 
 .note-detail .title {
   margin-bottom: 20px;

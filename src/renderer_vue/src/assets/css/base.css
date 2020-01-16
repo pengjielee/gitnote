@@ -98,3 +98,18 @@ body {
 .page {
   height: 100%;
 }
+
+.tags {
+  margin-bottom: 5px;
+}
+.tag{ display: inline-block; padding:0 5px;border-radius: 0.3rem; margin:0 5px 5px 0;color: #6e7687;background-color: #e9ecef;font-size: 14px;}
+.tag-rounded{ border-radius: 1rem;}
+.tag-red{ background: #cd201f;color:#fff;}
+.tag-green{ background: #5eba00;color: #fff;}
+.tag-blue{ background: #467fcf; color:#fff;}
+.tag-purple{ background: #a55eea;color:#fff;}
+.tag-pink{ background: #f66d9b;color:#fff;}
+.tag-orange{ background: #fd9644;color:#fff;}
+.tag-yellow{ background: #f1c40f;color:#fff;}
+.tag-gray{ background: #868e96;color:#fff;}
+.tag-black{ background: #343a40;color:#fff;}

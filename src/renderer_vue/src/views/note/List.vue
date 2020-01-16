@@ -7,6 +7,11 @@
             {{ note.title }}
           </p>
           <div class="content">{{ note.body }}</div>
+          <div class="tags">
+            <span v-for="tag in note.labels" v-bind:key="tag.id" class="tag">{{
+              tag.name
+            }}</span>
+          </div>
           <div class="date">{{ note.created_at }}</div>
           <div class="action"><a @click="handleEdit(note.number)">编辑</a></div>
         </li>

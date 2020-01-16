@@ -12,6 +12,13 @@
         {{ errors.first("title") }}
       </div>
     </div>
+    <div class="form-group">
+      <input-tag
+        placeholder="请输入标签"
+        v-model="note.labels"
+        :limit="limit"
+      ></input-tag>
+    </div>
     <div class="form-group form-area">
       <textarea class="textarea" v-model="note.body"></textarea>
     </div>
@@ -26,12 +33,12 @@ import swal from "sweetalert";
 export default {
   name: "NoteEdit",
   created() {
-    const self = this;
     const number = this.$route.params.number;
-    self.number = number;
+    this.number = number;
     noteApi.getDetail(number).then(res => {
       const data = res.data;
-      self.note = { title: data.title, body: data.body };
+      const labels = data.labels.map((item) => item.name)
+      this.note = { title: data.title, body: data.body, labels:labels  };
     });
   },
   methods: {
@@ -53,7 +60,8 @@ export default {
     return {
       note: {
         title: "",
-        body: ""
+        body: "",
+        labels: []
       }
     };
   }

@@ -13,6 +13,13 @@
         {{ errors.first("title") }}
       </div>
     </div>
+    <div class="form-group">
+      <input-tag
+        placeholder="请输入标签"
+        v-model="note.labels"
+        :limit="limit"
+      ></input-tag>
+    </div>
     <div class="form-group form-area">
       <textarea
         class="textarea"
@@ -48,8 +55,10 @@ export default {
     return {
       note: {
         title: "",
-        body: ""
-      }
+        body: "",
+        labels: []
+      },
+      limit: 10
     };
   }
 };

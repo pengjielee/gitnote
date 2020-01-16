@@ -6,9 +6,9 @@
   cursor: pointer;
   position: relative;
 }
-.note-list .item:last-child{
+/*.note-list .item:last-child{
   border-bottom: none;
-}
+}*/
 .note-list .title {
   font-size: 16px;
   font-weight: bold;
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 0 15px;
+  margin: 10px 0 15px;
 }
 .note-list .load-more .btn{
   width: 100%;
@@ -77,4 +77,25 @@
   width: 100%;
   padding: 10px 0;
   margin: 0;
+}
+
+.vue-input-tag-wrapper{
+  padding: 4px 0 0 5px;
+  font-size: 14px;
+}
+.vue-input-tag-wrapper .new-tag{
+  width: auto;
+}
+.vue-input-tag-wrapper .input-tag{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #eee;
+  color: #333;
+  padding: 3px 5px;
+  margin-right: 5px;
+}
+.vue-input-tag-wrapper .input-tag .remove{
+  margin-left: 5px;
 }

@@ -13,10 +13,9 @@ import noteApi from "@/api/note";
 export default {
   name: "NoteDetail",
   created() {
-    const self = this;
     const number = this.$route.params.number;
     noteApi.getDetail(number).then(res => {
-      self.note = res.data;
+      this.note = res.data;
     });
   },
   data() {

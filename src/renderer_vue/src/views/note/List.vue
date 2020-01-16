@@ -51,7 +51,7 @@ export default {
     getNotes() {
       const self = this;
       const page = this.page;
-      const size = 2;
+      const size = 20;
       noteApi.getList(page, size).then(res => {
         const newNotes = res.data;
         const oldNotes = this.notes;

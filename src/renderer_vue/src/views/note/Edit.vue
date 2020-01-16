@@ -37,8 +37,8 @@ export default {
     this.number = number;
     noteApi.getDetail(number).then(res => {
       const data = res.data;
-      const labels = data.labels.map((item) => item.name)
-      this.note = { title: data.title, body: data.body, labels:labels  };
+      const labels = data.labels.map(item => item.name);
+      this.note = { title: data.title, body: data.body, labels: labels };
     });
   },
   methods: {

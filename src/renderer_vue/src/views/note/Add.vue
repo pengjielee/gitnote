@@ -45,8 +45,9 @@ export default {
         }
         const note = this.note;
         noteApi.addNote(note).then(res => {
-          console.log(res);
-          swal("添加成功");
+          if (res.status === 201) {
+            swal("添加成功", "", "success");
+          }
         });
       });
     }

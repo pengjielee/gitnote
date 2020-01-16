@@ -50,8 +50,9 @@ export default {
         const note = this.note;
         const number = this.number;
         noteApi.editNote(number, note).then(res => {
-          console.log(res);
-          swal("保存成功");
+          if (res.status === 200) {
+            swal("保存成功", "", "success");
+          }
         });
       });
     }
@@ -62,7 +63,8 @@ export default {
         title: "",
         body: "",
         labels: []
-      }
+      },
+      limit: 10
     };
   }
 };

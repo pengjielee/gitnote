@@ -72,6 +72,12 @@
   margin: 0;
 }
 
+.note-tags .tags .tag {
+  padding: 10px;
+  margin: 0 15px 15px 0;
+  cursor: pointer;
+}
+
 .vue-input-tag-wrapper{
   padding: 4px 0 0 5px;
   font-size: 14px;

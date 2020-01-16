@@ -37,6 +37,10 @@ import noteApi from "@/api/note";
 export default {
   name: "NoteList",
   created: function() {
+    const tag = this.$route.params && this.$route.params.tag;
+    if (tag) {
+      this.search.labels = tag;
+    }
     this.getNotes();
   },
   computed: {
@@ -72,8 +76,8 @@ export default {
       this.getNotes();
     },
     getNotes() {
-      const { page, size, direction } = this.search;
-      noteApi.getList(page, size, direction).then(res => {
+      const { page, size, direction, labels } = this.search;
+      noteApi.getList(page, size, direction, labels).then(res => {
         const newNotes = res.data;
         const oldNotes = this.notes;
         if (newNotes.length <= 0) {
@@ -89,7 +93,8 @@ export default {
       search: {
         page: 1,
         size: 2,
-        direction: "desc"
+        direction: "desc",
+        labels: ""
       },
       isLoadOver: false
     };

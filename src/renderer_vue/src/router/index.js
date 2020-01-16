@@ -8,6 +8,7 @@ import NoteList from "../views/note/List.vue";
 import NoteAdd from "../views/note/Add.vue";
 import NoteEdit from "../views/note/Edit.vue";
 import NoteDetail from "../views/note/Detail.vue";
+import NoteTags from "../views/note/Tags.vue";
 
 Vue.use(VueRouter);
 
@@ -18,9 +19,14 @@ const routes = [
     component: Home
   },
   {
-    path: "/note/list",
+    path: "/note/list/:tag?",
     name: "noteList",
     component: NoteList
+  },
+  {
+    path: "/note/tags",
+    name: "noteTags",
+    component: NoteTags
   },
   {
     path: "/note/detail/:number",

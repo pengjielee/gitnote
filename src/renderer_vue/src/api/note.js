@@ -11,9 +11,9 @@ const config = {
 };
 
 export default {
-  getList(page, size = 10, direction = "desc") {
+  getList(page, size = 10, direction = "desc", labels = "") {
     return axios.get(
-      `${baseUrl}/issues?page=${page}&per_page=${size}&direction=${direction}`,
+      `${baseUrl}/issues?page=${page}&per_page=${size}&direction=${direction}&labels=${labels}`,
       config
     );
   },
@@ -25,5 +25,8 @@ export default {
   },
   editNote(number, data) {
     return axios.patch(`${baseUrl}/issues/${number}`, data, config);
+  },
+  getTags() {
+    return axios.get(`${baseUrl}/labels`, config);
   }
 };

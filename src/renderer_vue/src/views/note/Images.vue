@@ -34,13 +34,15 @@ export default {
     NoteUpload
   },
   created() {
-    noteApi.getImages().then(res => {
-      var images = res.data;
-      images.map(item => {
-        item.size = parseInt(item.size / 1000) + "KB";
-        return item;
+    noteApi.getConfig().then(config => {
+      noteApi.getImages(config).then(res => {
+        var images = res.data;
+        images.map(item => {
+          item.size = parseInt(item.size / 1000) + "KB";
+          return item;
+        });
+        this.images = images;
       });
-      this.images = images;
     });
   },
   methods: {

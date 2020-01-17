@@ -44,10 +44,12 @@ export default {
           return false;
         }
         const note = this.note;
-        noteApi.addNote(note).then(res => {
-          if (res.status === 201) {
-            swal("添加成功", "", "success");
-          }
+        noteApi.getConfig().then(config => {
+          noteApi.addNote(note, config).then(res => {
+            if (res.status === 201) {
+              swal("添加成功", "", "success");
+            }
+          });
         });
       });
     }

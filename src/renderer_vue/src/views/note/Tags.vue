@@ -20,14 +20,16 @@ import noteApi from "@/api/note";
 export default {
   name: "NoteTags",
   created() {
-    noteApi.getTags().then(res => {
-      let tags = [];
-      res.data.forEach(tag => {
-        if (this.systemTags.indexOf(tag.name) < 0) {
-          tags.push(tag);
-        }
+    noteApi.getConfig().then(config => {
+      noteApi.getTags(config).then(res => {
+        let tags = [];
+        res.data.forEach(tag => {
+          if (this.systemTags.indexOf(tag.name) < 0) {
+            tags.push(tag);
+          }
+        });
+        this.tags = tags;
       });
-      this.tags = tags;
     });
   },
   methods: {

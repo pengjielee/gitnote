@@ -35,10 +35,12 @@ export default {
   created() {
     const number = this.$route.params.number;
     this.number = number;
-    noteApi.getDetail(number).then(res => {
-      const data = res.data;
-      const labels = data.labels.map(item => item.name);
-      this.note = { title: data.title, body: data.body, labels: labels };
+    noteApi.getConfig().then(config => {
+      noteApi.getDetail(number, config).then(res => {
+        const data = res.data;
+        const labels = data.labels.map(item => item.name);
+        this.note = { title: data.title, body: data.body, labels: labels };
+      });
     });
   },
   methods: {
@@ -49,10 +51,12 @@ export default {
         }
         const note = this.note;
         const number = this.number;
-        noteApi.editNote(number, note).then(res => {
-          if (res.status === 200) {
-            swal("保存成功", "", "success");
-          }
+        noteApi.getConfig().then(config => {
+          noteApi.editNote(number, note, config).then(res => {
+            if (res.status === 200) {
+              swal("保存成功", "", "success");
+            }
+          });
         });
       });
     }

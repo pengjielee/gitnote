@@ -8,6 +8,7 @@
         class="form-input"
         type="text"
         v-model="config.repo"
+        placeholder="格式：username/repo"
         name="repo"
         v-validate="'required'"
       />
@@ -23,6 +24,7 @@
         class="form-input"
         type="text"
         v-model="config.token"
+        placeholder="token"
         name="token"
         v-validate="'required'"
       />
@@ -50,14 +52,32 @@
 </template>
 
 <script>
+import swal from "sweetalert";
+
 export default {
   name: "Setting",
+  created: function() {
+    const self = this;
+    window.localForage.getItem("config", function(err, value) {
+      if (err) {
+        return;
+      }
+      self.$data.config = value;
+    });
+  },
   methods: {
     handleSave() {
       this.$validator.validate().then(async result => {
         if (!result) {
           return false;
         }
+        window.localForage.setItem("config", this.config, function(err) {
+          if (err) {
+            swal("保存失败", "", "error");
+          } else {
+            swal("保存成功", "", "success");
+          }
+        });
       });
     }
   },

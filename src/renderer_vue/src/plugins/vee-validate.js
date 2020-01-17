@@ -8,7 +8,10 @@ const dictionary = {
       required: field => "请填写" + field
     },
     attributes: {
-      title: "标题"
+      title: "标题",
+      repo: "仓库名",
+      token: "token",
+      size: "条数"
     }
   }
 };

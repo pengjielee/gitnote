@@ -83,13 +83,15 @@ export default {
     },
     getNotes() {
       const { page, size, direction, labels } = this.search;
-      noteApi.getList(page, size, direction, labels).then(res => {
-        const newNotes = res.data;
-        const oldNotes = this.notes;
-        if (newNotes.length <= 0) {
-          this.isLoadOver = true;
-        }
-        this.notes = oldNotes.concat(newNotes);
+      noteApi.getConfig().then(config => {
+        noteApi.getList(page, size, direction, labels, config).then(res => {
+          const newNotes = res.data;
+          const oldNotes = this.notes;
+          if (newNotes.length <= 0) {
+            this.isLoadOver = true;
+          }
+          this.notes = oldNotes.concat(newNotes);
+        });
       });
     }
   },

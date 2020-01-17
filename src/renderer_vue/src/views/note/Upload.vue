@@ -37,13 +37,19 @@ export default {
       const file = e.target.files[0];
       toDataURL(file).then(function(content) {
         content = content.slice(content.indexOf(",") + 1);
-        noteApi
-          .upload(file.name, { message: "upload image", content: content })
-          .then(function(res) {
-            if (res.status === 201) {
-              swal("上传成功", "", "success");
-            }
-          });
+        noteApi.getConfig().then(config => {
+          noteApi
+            .upload(
+              file.name,
+              { message: "upload image", content: content },
+              config
+            )
+            .then(function(res) {
+              if (res.status === 201) {
+                swal("上传成功", "", "success");
+              }
+            });
+        });
       });
     },
     handleUpload() {

@@ -76,6 +76,15 @@ body {
   margin-left: 0.1rem;
 }
 
+.btn-new {
+  background: #42b983;
+  color: #fff;
+}
+.btn-sort{
+  background: #2185d0;
+  color: #fff;
+}
+
 .media {
   display: table;
   width: 100%;

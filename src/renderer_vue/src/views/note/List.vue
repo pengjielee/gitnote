@@ -1,6 +1,9 @@
 <template>
   <div class="page note-list">
     <div class="page-header">
+      <button class="btn btn-new" @click="handleNew">
+        新建笔记
+      </button>
       <button class="btn btn-sort" @click="handleSort">
         {{ directionName }}排列
       </button>
@@ -64,6 +67,9 @@ export default {
     },
     handleSave() {
       console.log("save");
+    },
+    handleNew() {
+      this.$router.push(`/note/add`);
     },
     handleEdit(number) {
       this.$router.push(`/note/edit/${number}`);

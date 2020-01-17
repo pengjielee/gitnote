@@ -1,11 +1,15 @@
 <template>
   <div class="note-upload">
-    <input
-      type="file"
-      :accept="accept"
-      :multiple="multiple"
-      @change="handleChange"
-    />
+    <div class="uploader" @click="handleUpload">
+      <input
+        type="file"
+        ref="input"
+        :accept="accept"
+        :multiple="multiple"
+        @change="handleChange"
+      />
+      <span class="plus">+</span>
+    </div>
   </div>
 </template>
 
@@ -13,20 +17,25 @@
 import noteApi from "@/api/note";
 import swal from "sweetalert";
 
-function readBlobAsDataURL(blob, callback) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    callback(e.target.result);
-  };
-  reader.readAsDataURL(blob);
-}
+const toDataURL = blob => {
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      resolve(e.target.result);
+    };
+    reader.onerror = function() {
+      reject(false);
+    };
+    reader.readAsDataURL(blob);
+  });
+};
 
 export default {
   name: "NoteUpload",
   methods: {
     handleChange(e) {
       const file = e.target.files[0];
-      readBlobAsDataURL(file, function(content) {
+      toDataURL(file).then(function(content) {
         content = content.slice(content.indexOf(",") + 1);
         noteApi
           .upload(file.name, { message: "upload image", content: content })
@@ -36,6 +45,10 @@ export default {
             }
           });
       });
+    },
+    handleUpload() {
+      this.$refs.input.value = null;
+      this.$refs.input.click();
     }
   },
   data() {

@@ -1,34 +1,40 @@
 <template>
-  <div class="note-images">
-    <ul class="list">
-      <li v-for="image in images" v-bind:key="image.sha" class="item">
-        <dl class="media">
-          <dt class="media-left">
-            <img :src="image.download_url" width="100px" />
-          </dt>
-          <dd class="media-object">
-            <p class="title">{{ image.name }}</p>
-            <p class="size">{{ image.size }}</p>
-            <p class="action">
-              <a @click="handleCopy(image, 'http')">复制为HTTP</a
-              ><a @click="handleCopy(image, 'md')">复制为Markdown</a>
-            </p>
-          </dd>
-        </dl>
-      </li>
-    </ul>
+  <div>
+    <note-upload></note-upload>
+    <div class="note-images">
+      <ul class="list">
+        <li v-for="image in images" v-bind:key="image.sha" class="item">
+          <dl class="media">
+            <dt class="media-left">
+              <img :src="image.download_url" width="100px" />
+            </dt>
+            <dd class="media-object">
+              <p class="title">{{ image.name }}</p>
+              <p class="size">{{ image.size }}</p>
+              <p class="action">
+                <a @click="handleCopy(image, 'http')">复制为HTTP</a
+                ><a @click="handleCopy(image, 'md')">复制为MARKDOWN</a>
+              </p>
+            </dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import noteApi from "@/api/note";
 import swal from "sweetalert";
+import NoteUpload from "./Upload.vue";
 
 export default {
   name: "NoteImages",
+  components: {
+    NoteUpload
+  },
   created() {
     noteApi.getImages().then(res => {
-      console.log(res);
       var images = res.data;
       images.map(item => {
         item.size = parseInt(item.size / 1000) + "KB";

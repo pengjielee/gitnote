@@ -6,6 +6,7 @@ Vue.config.productionTip = false;
 
 import "@/plugins/vee-validate.js";
 import "@/plugins/input-tag.js";
+import "@/plugins/vue-clipboard.js";
 
 import "@/assets/css/base.css";
 import "@/assets/css/page.css";

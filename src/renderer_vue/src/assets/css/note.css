@@ -78,6 +78,25 @@
   cursor: pointer;
 }
 
+.note-images .media-left{
+  width: 120px;
+}
+.note-images .media-object{
+  padding-top: 15px;
+}
+.note-images .size{
+  margin: 5px 0;
+}
+.note-images .action{
+  font-size: 12px;
+}
+.note-images .action a{
+  margin-right: 10px;
+  color: blue;
+  cursor: pointer;
+}
+
+
 .vue-input-tag-wrapper{
   padding: 4px 0 0 5px;
   font-size: 14px;

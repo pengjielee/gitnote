@@ -38,20 +38,27 @@ import swal from "sweetalert";
 export default {
   name: "NoteAdd",
   methods: {
-    handleSave() {
-      this.$validator.validate().then(async result => {
-        if (!result) {
-          return false;
+    async handleSave() {
+      const valid = await this.$validator.validate();
+      if (!valid) {
+        return false;
+      }
+
+      const config = await noteApi.getConfig();
+      if (!config) {
+        this.$router.replace("/note/setting");
+        return;
+      }
+
+      const note = this.note;
+      try {
+        const res = await noteApi.addNote(note, config);
+        if (res.status === 201) {
+          swal("添加成功", "", "success");
         }
-        const note = this.note;
-        noteApi.getConfig().then(config => {
-          noteApi.addNote(note, config).then(res => {
-            if (res.status === 201) {
-              swal("添加成功", "", "success");
-            }
-          });
-        });
-      });
+      } catch (error) {
+        swal("出错了", error.message, "error");
+      }
     }
   },
   data() {

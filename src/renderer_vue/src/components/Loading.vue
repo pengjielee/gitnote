@@ -10,8 +10,8 @@ export default {
   name: "Loading",
   props: {
     height: {
-      type: Number,
-      default: 60
+      type: String,
+      default: "60"
     }
   }
 };

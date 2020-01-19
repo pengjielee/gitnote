@@ -35,21 +35,28 @@ export default {
   methods: {
     handleChange(e) {
       const file = e.target.files[0];
-      toDataURL(file).then(function(content) {
+      toDataURL(file).then(async function(content) {
         content = content.slice(content.indexOf(",") + 1);
-        noteApi.getConfig().then(config => {
-          noteApi
-            .upload(
-              file.name,
-              { message: "upload image", content: content },
-              config
-            )
-            .then(function(res) {
-              if (res.status === 201) {
-                swal("上传成功", "", "success");
-              }
-            });
-        });
+
+        const config = await noteApi.getConfig();
+        if (!config) {
+          this.$router.replace("/note/setting");
+          return;
+        }
+
+        try {
+          const res = await noteApi.upload(
+            file.name,
+            { message: "upload image", content: content },
+            config
+          );
+
+          if (res.status === 201) {
+            swal("上传成功", "", "success");
+          }
+        } catch (error) {
+          swal("出错了", error.message, "error");
+        }
       });
     },
     handleUpload() {

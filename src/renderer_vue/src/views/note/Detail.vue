@@ -26,18 +26,26 @@
 
 <script>
 import noteApi from "@/api/note";
+import swal from "sweetalert";
 import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
   name: "NoteDetail",
   mixins: [loadingMixin],
-  created() {
+  async created() {
+    const config = await noteApi.getConfig();
+    if (!config) {
+      this.$router.replace("/note/setting");
+      return;
+    }
+
     const number = this.$route.params.number;
-    noteApi.getConfig().then(config => {
-      noteApi.getDetail(number, config).then(res => {
-        this.note = res.data;
-      });
-    });
+    try {
+      const res = await noteApi.getDetail(number, config);
+      this.note = res.data;
+    } catch (error) {
+      swal("出错了", error.message, "error");
+    }
   },
   methods: {
     handleTag(name) {

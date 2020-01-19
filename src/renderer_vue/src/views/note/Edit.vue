@@ -39,35 +39,49 @@ import { loadingMixin } from "@/mixins/loading.js";
 export default {
   name: "NoteEdit",
   mixins: [loadingMixin],
-  created() {
+  async created() {
+    const config = await noteApi.getConfig();
+    if (!config) {
+      this.$router.replace("/note/setting");
+      return;
+    }
+
     const number = this.$route.params.number;
     this.number = number;
     this.isShowLoading = true;
-    noteApi.getConfig().then(config => {
-      noteApi.getDetail(number, config).then(res => {
-        const data = res.data;
-        const labels = data.labels.map(item => item.name);
-        this.note = { title: data.title, body: data.body, labels: labels };
-        this.isShowLoading = false;
-      });
-    });
+    try {
+      const res = await noteApi.getDetail(number, config);
+      const data = res.data;
+      const labels = data.labels.map(item => item.name);
+      this.note = { title: data.title, body: data.body, labels: labels };
+      this.isShowLoading = false;
+    } catch (error) {
+      swal("出错了", error.message, "error");
+    }
   },
   methods: {
-    handleSave() {
-      this.$validator.validate().then(async result => {
-        if (!result) {
-          return false;
+    async handleSave() {
+      const valid = await this.$validator.validate();
+      if (!valid) {
+        return false;
+      }
+
+      const config = await noteApi.getConfig();
+      if (!config) {
+        this.$router.replace("/note/setting");
+        return;
+      }
+
+      const note = this.note;
+      const number = this.number;
+      try {
+        const res = await noteApi.editNote(number, note, config);
+        if (res.status === 200) {
+          swal("保存成功", "", "success");
         }
-        const note = this.note;
-        const number = this.number;
-        noteApi.getConfig().then(config => {
-          noteApi.editNote(number, note, config).then(res => {
-            if (res.status === 200) {
-              swal("保存成功", "", "success");
-            }
-          });
-        });
-      });
+      } catch (error) {
+        swal("出错了", error.message, "error");
+      }
     }
   },
   data() {

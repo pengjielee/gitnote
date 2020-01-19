@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 import noteApi from "@/api/note";
 import { loadingMixin } from "@/mixins/loading.js";
 
@@ -86,20 +87,33 @@ export default {
       this.search.page = this.search.page + 1;
       this.getNotes();
     },
-    getNotes() {
+    async getNotes() {
       this.isShowLoading = true;
       const { page, size, direction, labels } = this.search;
-      noteApi.getConfig().then(config => {
-        noteApi.getList(page, size, direction, labels, config).then(res => {
-          const newNotes = res.data;
-          const oldNotes = this.notes;
-          if (newNotes.length <= 0) {
-            this.isLoadOver = true;
-          }
-          this.isShowLoading = false;
-          this.notes = oldNotes.concat(newNotes);
-        });
-      });
+
+      const config = await noteApi.getConfig();
+      if (!config) {
+        this.$router.replace("/note/setting");
+        return;
+      }
+      try {
+        const res = await noteApi.getList(
+          page,
+          size,
+          direction,
+          labels,
+          config
+        );
+        const newNotes = res.data;
+        const oldNotes = this.notes;
+        if (newNotes.length <= 0) {
+          this.isLoadOver = true;
+        }
+        this.isShowLoading = false;
+        this.notes = oldNotes.concat(newNotes);
+      } catch (error) {
+        swal("出错了", error.message, "error");
+      }
     }
   },
   data() {
@@ -107,7 +121,6 @@ export default {
       notes: [],
       search: {
         page: 1,
-        size: 2,
         direction: "desc",
         labels: ""
       },

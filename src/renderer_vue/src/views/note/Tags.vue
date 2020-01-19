@@ -18,26 +18,33 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 import noteApi from "@/api/note";
 import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
   name: "NoteTags",
   mixins: [loadingMixin],
-  created() {
+  async created() {
     this.isShowLoading = true;
-    noteApi.getConfig().then(config => {
-      noteApi.getTags(config).then(res => {
-        let tags = [];
-        res.data.forEach(tag => {
-          if (this.systemTags.indexOf(tag.name) < 0) {
-            tags.push(tag);
-          }
-        });
-        this.tags = tags;
-        this.isShowLoading = false;
+    const config = await noteApi.getConfig();
+    if (!config) {
+      this.$router.replace("/note/setting");
+      return;
+    }
+    try {
+      const res = await noteApi.getTags(config);
+      let tags = [];
+      res.data.forEach(tag => {
+        if (this.systemTags.indexOf(tag.name) < 0) {
+          tags.push(tag);
+        }
       });
-    });
+      this.tags = tags;
+      this.isShowLoading = false;
+    } catch (error) {
+      swal("出错了", error.message, "error");
+    }
   },
   methods: {
     handleTag(name) {

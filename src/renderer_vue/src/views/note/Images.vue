@@ -38,19 +38,26 @@ export default {
   components: {
     NoteUpload
   },
-  created() {
+  async created() {
     this.isShowLoading = true;
-    noteApi.getConfig().then(config => {
-      noteApi.getImages(config).then(res => {
-        var images = res.data;
-        images.map(item => {
-          item.size = parseInt(item.size / 1000) + "KB";
-          return item;
-        });
-        this.images = images;
-        this.isShowLoading = false;
+    const config = await noteApi.getConfig();
+
+    if (!config) {
+      this.$router.replace("/note/setting");
+      return;
+    }
+    try {
+      const res = await noteApi.getImages(config);
+      var images = res.data;
+      images.map(item => {
+        item.size = parseInt(item.size / 1000) + "KB";
+        return item;
       });
-    });
+      this.images = images;
+      this.isShowLoading = false;
+    } catch (error) {
+      swal("出错了", error.message, "error");
+    }
   },
   methods: {
     handleCopy(image, type) {

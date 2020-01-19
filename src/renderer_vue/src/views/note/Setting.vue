@@ -22,7 +22,7 @@
       </div>
       <input
         class="form-input"
-        type="text"
+        type="password"
         v-model="config.token"
         placeholder="token"
         name="token"
@@ -62,11 +62,14 @@ export default {
       if (err) {
         return;
       }
-      self.$data.config = value;
+      if (value) {
+        self.$data.config = value;
+      }
     });
   },
   methods: {
     handleSave() {
+      const self = this;
       this.$validator.validate().then(async result => {
         if (!result) {
           return false;
@@ -75,7 +78,9 @@ export default {
           if (err) {
             swal("保存失败", "", "error");
           } else {
-            swal("保存成功", "", "success");
+            swal("保存成功", "", "success").then(function() {
+              self.$router.push("/note/list");
+            });
           }
         });
       });

@@ -9,7 +9,6 @@ import "@/plugins/input-tag.js";
 import "@/plugins/vue-clipboard.js";
 
 import "@/assets/css/base.css";
-import "@/assets/css/page.css";
 import "@/assets/css/note.css";
 
 window.localForage = require("localforage");

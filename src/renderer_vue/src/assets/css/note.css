@@ -120,24 +120,3 @@
   display: none;
 }
 
-
-.vue-input-tag-wrapper{
-  padding: 4px 0 0 5px;
-  font-size: 14px;
-}
-.vue-input-tag-wrapper .new-tag{
-  width: auto;
-}
-.vue-input-tag-wrapper .input-tag{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: #eee;
-  color: #333;
-  padding: 3px 5px;
-  margin-right: 5px;
-}
-.vue-input-tag-wrapper .input-tag .remove{
-  margin-left: 5px;
-}

@@ -27,7 +27,10 @@
         placeholder="请输入内容"
       ></textarea>
     </div>
-    <button class="btn btn-primary" @click="handleSave">保存</button>
+    <div class="form-group">
+      <button class="btn btn-primary" @click="handleSave">保存</button>
+      <button class="btn" @click="handleBack">返回</button>
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,9 @@ export default {
       } catch (error) {
         swal("出错了", error.message, "error");
       }
+    },
+    handleBack() {
+      this.$router.back();
     }
   },
   data() {

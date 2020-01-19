@@ -1,5 +1,8 @@
 <template>
   <div class="note-detail">
+    <div class="note-header">
+      <a class="back" @click="handleBack">返回</a>
+    </div>
     <template v-if="isShowLoading">
       <Loading height="300" />
     </template>
@@ -50,6 +53,9 @@ export default {
   methods: {
     handleTag(name) {
       this.$router.push(`/note/list/${name}`);
+    },
+    handleBack() {
+      this.$router.back();
     }
   },
   data() {

@@ -102,12 +102,12 @@ export default {
           labels,
           config
         );
-        let newNotes = res.data.map((note) => {
-          if(note.body.length > 100){
+        let newNotes = res.data.map(note => {
+          if (note.body.length > 100) {
             note.body = note.body.slice(0, 100);
           }
           return note;
-        })
+        });
         const oldNotes = this.notes;
         if (newNotes.length <= 0) {
           this.isLoadOver = true;

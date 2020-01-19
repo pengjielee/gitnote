@@ -38,5 +38,6 @@ export default {
 .welcome .link {
   color: blue;
   font-size: 14px;
+  cursor: pointer;
 }
 </style>

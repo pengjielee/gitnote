@@ -3,17 +3,20 @@
     <template v-if="isShowLoading">
       <Loading height="300" />
     </template>
-    <div class="tags">
-      <span
-        v-for="tag in tags"
-        v-bind:key="tag.id"
-        class="tag"
-        :style="{ background: '#' + tag.color }"
-        @click="handleTag(tag.name)"
-      >
-        {{ tag.name }}
-      </span>
-    </div>
+    <template v-else>
+      <div class="tags" v-if="tags.length > 0">
+        <span
+          v-for="tag in tags"
+          v-bind:key="tag.id"
+          class="tag"
+          :style="{ background: '#' + tag.color }"
+          @click="handleTag(tag.name)"
+        >
+          {{ tag.name }}
+        </span>
+      </div>
+      <div class="empty" v-else>什么也没有</div>
+    </template>
   </div>
 </template>
 

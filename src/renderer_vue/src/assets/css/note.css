@@ -65,11 +65,19 @@
   margin-bottom: 5px;
 }
 .note-detail .content {
-  font-size: 18px;
-  padding: 10px 0;
+  font-size: 16px;
+  padding: 15px;
+  word-break: break-all;
+  background: #eff1f5;
+  margin: 10px 0;
+  overflow: scroll;
 }
 .note-detail .date{
   font-size: 14px;
+}
+
+.note-header{
+  margin-bottom: 15px;
 }
 
 .note-edit {
@@ -78,7 +86,6 @@
 .note-edit .btn {
   width: 100%;
   padding: 10px 0;
-  margin: 0;
 }
 
 .note-tags .tags .tag {

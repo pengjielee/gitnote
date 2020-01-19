@@ -64,6 +64,7 @@ export default {
         this.isShowLoading = false;
       } catch (error) {
         swal("出错了", error.message, "error");
+        this.isShowLoading = false;
       }
     },
     handleCopy(image, type) {

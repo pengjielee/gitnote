@@ -14,8 +14,10 @@ export default {
   name: "NoteDetail",
   created() {
     const number = this.$route.params.number;
-    noteApi.getDetail(number).then(res => {
-      this.note = res.data;
+    noteApi.getConfig().then(config => {
+      noteApi.getDetail(number, config).then(res => {
+        this.note = res.data;
+      });
     });
   },
   data() {

@@ -17,7 +17,8 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    component: Home,
+    meta: { title: "GitNote" }
   },
   {
     path: "/note",
@@ -27,37 +28,44 @@ const routes = [
       {
         path: "list/:tag?",
         name: "noteList",
-        component: NoteList
+        component: NoteList,
+        meta: { title: "笔记列表" }
       },
       {
         path: "tags",
         name: "noteTags",
-        component: NoteTags
+        component: NoteTags,
+        meta: { title: "笔记标签" }
       },
       {
         path: "images",
         name: "noteImages",
-        component: NoteImages
+        component: NoteImages,
+        meta: { title: "图片列表" }
       },
       {
         path: "detail/:number",
         name: "noteDetail",
-        component: NoteDetail
+        component: NoteDetail,
+        meta: { title: "笔记详情" }
       },
       {
         path: "add",
         name: "noteAdd",
-        component: NoteAdd
+        component: NoteAdd,
+        meta: { title: "添加笔记" }
       },
       {
         path: "edit/:number",
         name: "noteEdit",
-        component: NoteEdit
+        component: NoteEdit,
+        meta: { title: "编辑笔记" }
       },
       {
         path: "setting",
         name: "noteSetting",
-        component: NoteSetting
+        component: NoteSetting,
+        meta: { title: "设置" }
       }
     ]
   }
@@ -74,6 +82,12 @@ const routes = [
 
 const router = new VueRouter({
   routes
+});
+
+router.afterEach(to => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
 });
 
 export default router;

@@ -89,13 +89,14 @@ export default {
     },
     async getNotes() {
       this.isShowLoading = true;
-      const { page, size, direction, labels } = this.search;
+      const { page, direction, labels } = this.search;
 
       const config = await noteApi.getConfig();
       if (!config) {
         this.$router.replace("/note/setting");
         return;
       }
+      const size = config.size ? config.size : 20;
       try {
         const res = await noteApi.getList(
           page,

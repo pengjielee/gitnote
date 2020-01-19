@@ -162,6 +162,7 @@ body {
 }
 #app .sidebar {
   width: 230px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   background: #f5f5f5;

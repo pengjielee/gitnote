@@ -36,7 +36,7 @@
       <div class="form-label"><label>每页显示几条</label></div>
       <input
         class="form-input"
-        type="text"
+        type="number"
         v-model="config.size"
         name="size"
         v-validate="'required'"

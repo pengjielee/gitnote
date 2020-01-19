@@ -24,6 +24,9 @@
           <div class="action"><a @click="handleEdit(note.number)">编辑</a></div>
         </li>
       </ul>
+      <template v-if="isShowLoading">
+        <Loading />
+      </template>
       <div class="load-more">
         <button class="btn" @click="handleLoad" v-if="!isLoadOver">
           加载更多
@@ -36,9 +39,11 @@
 
 <script>
 import noteApi from "@/api/note";
+import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
   name: "NoteList",
+  mixins: [loadingMixin],
   created: function() {
     const tag = this.$route.params && this.$route.params.tag;
     if (tag) {
@@ -48,7 +53,7 @@ export default {
   },
   computed: {
     directionName: function() {
-      return this.search.direction === "asc" ? "升序" : "降序";
+      return this.search.direction === "asc" ? "降序" : "升序";
     }
   },
   methods: {
@@ -82,6 +87,7 @@ export default {
       this.getNotes();
     },
     getNotes() {
+      this.isShowLoading = true;
       const { page, size, direction, labels } = this.search;
       noteApi.getConfig().then(config => {
         noteApi.getList(page, size, direction, labels, config).then(res => {
@@ -90,6 +96,7 @@ export default {
           if (newNotes.length <= 0) {
             this.isLoadOver = true;
           }
+          this.isShowLoading = false;
           this.notes = oldNotes.concat(newNotes);
         });
       });

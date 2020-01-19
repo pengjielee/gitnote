@@ -2,6 +2,9 @@
   <div>
     <note-upload></note-upload>
     <div class="note-images">
+      <template v-if="isShowLoading">
+        <Loading height="300" />
+      </template>
       <ul class="list">
         <li v-for="image in images" v-bind:key="image.sha" class="item">
           <dl class="media">
@@ -27,13 +30,16 @@
 import noteApi from "@/api/note";
 import swal from "sweetalert";
 import NoteUpload from "./Upload.vue";
+import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
   name: "NoteImages",
+  mixins: [loadingMixin],
   components: {
     NoteUpload
   },
   created() {
+    this.isShowLoading = true;
     noteApi.getConfig().then(config => {
       noteApi.getImages(config).then(res => {
         var images = res.data;
@@ -42,6 +48,7 @@ export default {
           return item;
         });
         this.images = images;
+        this.isShowLoading = false;
       });
     });
   },

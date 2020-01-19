@@ -1,5 +1,8 @@
 <template>
   <div class="note-tags">
+    <template v-if="isShowLoading">
+      <Loading height="300" />
+    </template>
     <div class="tags">
       <span
         v-for="tag in tags"
@@ -16,10 +19,13 @@
 
 <script>
 import noteApi from "@/api/note";
+import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
   name: "NoteTags",
+  mixins: [loadingMixin],
   created() {
+    this.isShowLoading = true;
     noteApi.getConfig().then(config => {
       noteApi.getTags(config).then(res => {
         let tags = [];
@@ -29,6 +35,7 @@ export default {
           }
         });
         this.tags = tags;
+        this.isShowLoading = false;
       });
     });
   },

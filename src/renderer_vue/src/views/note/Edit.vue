@@ -1,45 +1,54 @@
 <template>
   <div class="page note-edit">
-    <div class="form-group">
-      <input
-        class="form-input"
-        type="text"
-        v-model="note.title"
-        name="title"
-        v-validate="'required'"
-      />
-      <div v-show="errors.has('title')" class="form-error">
-        {{ errors.first("title") }}
+    <template v-if="isShowLoading">
+      <Loading height="300" />
+    </template>
+    <template v-else>
+      <div class="form-group">
+        <input
+          class="form-input"
+          type="text"
+          v-model="note.title"
+          name="title"
+          v-validate="'required'"
+        />
+        <div v-show="errors.has('title')" class="form-error">
+          {{ errors.first("title") }}
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <input-tag
-        placeholder="请输入标签"
-        v-model="note.labels"
-        :limit="limit"
-      ></input-tag>
-    </div>
-    <div class="form-group form-area">
-      <textarea class="textarea" v-model="note.body"></textarea>
-    </div>
-    <button class="btn btn-primary" @click="handleSave">保存</button>
+      <div class="form-group">
+        <input-tag
+          placeholder="请输入标签"
+          v-model="note.labels"
+          :limit="limit"
+        ></input-tag>
+      </div>
+      <div class="form-group form-area">
+        <textarea class="textarea" v-model="note.body"></textarea>
+      </div>
+      <button class="btn btn-primary" @click="handleSave">保存</button>
+    </template>
   </div>
 </template>
 
 <script>
 import noteApi from "@/api/note";
 import swal from "sweetalert";
+import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
   name: "NoteEdit",
+  mixins: [loadingMixin],
   created() {
     const number = this.$route.params.number;
     this.number = number;
+    this.isShowLoading = true;
     noteApi.getConfig().then(config => {
       noteApi.getDetail(number, config).then(res => {
         const data = res.data;
         const labels = data.labels.map(item => item.name);
         this.note = { title: data.title, body: data.body, labels: labels };
+        this.isShowLoading = false;
       });
     });
   },

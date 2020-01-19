@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 0 15px;
+  margin: 0px 0 15px;
 }
 .note-list .load-more .btn{
   width: 300px;
@@ -61,10 +61,14 @@
 
 
 .note-detail .title {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .note-detail .content {
-  font-size: 16px;
+  font-size: 18px;
+  padding: 10px 0;
+}
+.note-detail .date{
+  font-size: 14px;
 }
 
 .note-edit {

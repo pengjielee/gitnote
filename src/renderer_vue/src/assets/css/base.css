@@ -101,7 +101,7 @@ body {
   border: none;
   border-radius: 5px;
   padding: 10px;
-  min-height: 500px;
+  min-height: 300px;
   height: 100%;
 }
 
@@ -178,6 +178,10 @@ body {
 
 .nav {
   margin-bottom: 20px;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .nav li {
   padding: 15px;

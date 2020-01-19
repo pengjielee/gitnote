@@ -34,6 +34,7 @@ export default {
   name: "NoteUpload",
   methods: {
     handleChange(e) {
+      const self = this;
       const file = e.target.files[0];
       toDataURL(file).then(async function(content) {
         content = content.slice(content.indexOf(",") + 1);
@@ -53,6 +54,7 @@ export default {
 
           if (res.status === 201) {
             swal("上传成功", "", "success");
+            self.$emit("uploadSuccess");
           }
         } catch (error) {
           swal("出错了", error.message, "error");

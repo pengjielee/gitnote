@@ -1,6 +1,6 @@
 <template>
   <div>
-    <note-upload></note-upload>
+    <note-upload v-on:uploadSuccess="onUploadSuccess"></note-upload>
     <div class="note-images">
       <template v-if="isShowLoading">
         <Loading height="300" />
@@ -38,28 +38,34 @@ export default {
   components: {
     NoteUpload
   },
-  async created() {
-    this.isShowLoading = true;
-    const config = await noteApi.getConfig();
-
-    if (!config) {
-      this.$router.replace("/note/setting");
-      return;
-    }
-    try {
-      const res = await noteApi.getImages(config);
-      var images = res.data;
-      images.map(item => {
-        item.size = parseInt(item.size / 1000) + "KB";
-        return item;
-      });
-      this.images = images;
-      this.isShowLoading = false;
-    } catch (error) {
-      swal("出错了", error.message, "error");
-    }
+  created() {
+    this.getImages();
   },
   methods: {
+    onUploadSuccess() {
+      this.getImages();
+    },
+    async getImages() {
+      this.isShowLoading = true;
+      const config = await noteApi.getConfig();
+
+      if (!config) {
+        this.$router.replace("/note/setting");
+        return;
+      }
+      try {
+        const res = await noteApi.getImages(config);
+        var images = res.data;
+        images.map(item => {
+          item.size = parseInt(item.size / 1000) + "KB";
+          return item;
+        });
+        this.images = images;
+        this.isShowLoading = false;
+      } catch (error) {
+        swal("出错了", error.message, "error");
+      }
+    },
     handleCopy(image, type) {
       var content = image.download_url;
       if (type === "md") {

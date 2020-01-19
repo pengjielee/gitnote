@@ -27,12 +27,11 @@ const createWindow = () => {
   
   if(process.env.NODE_ENV === 'development'){
     mainWindow.loadURL('http://localhost:8080');
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools();
   }else {
     mainWindow.loadFile(path.join(__dirname, 'renderer/index.html'));
   }
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {

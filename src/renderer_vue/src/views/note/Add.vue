@@ -1,16 +1,18 @@
 <template>
   <div class="note-edit">
     <div class="form-group">
-      <input
-        type="text"
-        class="form-input"
-        v-model="note.title"
-        placeholder="请输入标题"
-        name="title"
-        v-validate="'required'"
-      />
-      <div v-show="errors.has('title')" class="form-error">
-        {{ errors.first("title") }}
+      <div class="fluid ui input">
+        <input
+          type="text"
+          class="form-input"
+          v-model="note.title"
+          placeholder="请输入标题"
+          name="title"
+          v-validate="'required'"
+        />
+        <div v-show="errors.has('title')" class="form-error">
+          {{ errors.first("title") }}
+        </div>
       </div>
     </div>
     <div class="form-group">

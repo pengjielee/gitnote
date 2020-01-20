@@ -1,7 +1,7 @@
 <template>
   <div class="note-edit">
     <div class="form-group">
-      <div class="fluid ui input">
+      <div class="">
         <input
           type="text"
           class="form-input"
@@ -23,24 +23,45 @@
       ></input-tag>
     </div>
     <div class="form-group form-area">
-      <textarea
-        class="textarea"
-        v-model="note.body"
-        placeholder="请输入内容"
-      ></textarea>
+      <div class="ui pointing menu">
+        <a :class="{ item: true, active: !isPreview }" @click="handleMarkdown">
+          Markdown
+        </a>
+        <a :class="{ item: true, active: isPreview }" @click="handlePreview">
+          预览HTML
+        </a>
+      </div>
+      <div class="ui segment">
+        <div v-if="!isPreview">
+          <textarea
+            class="textarea"
+            v-model="note.body"
+            placeholder="请输入内容"
+          ></textarea>
+        </div>
+        <template v-else>
+          <div class="markdown" v-html="html"></div>
+        </template>
+      </div>
     </div>
     <div class="form-group">
-      <button class="ui primary button" @click="handleSave">保存</button>
-      <button class="ui button" @click="handleBack">返回</button>
+      <div class="ui buttons">
+        <button class="large ui primary button" @click="handleSave">
+          保存
+        </button>
+        <button class="large ui button" @click="handleBack">返回</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import noteApi from "@/api/note";
+import { noteMixin } from "@/mixins/note.js";
 
 export default {
   name: "NoteAdd",
+  mixins: [noteMixin],
   methods: {
     async handleSave() {
       const valid = await this.$validator.validate();

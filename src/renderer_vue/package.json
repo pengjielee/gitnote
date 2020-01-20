@@ -12,6 +12,7 @@
     "core-js": "^3.4.4",
     "element-ui": "^2.13.0",
     "localforage": "^1.7.3",
+    "markdown-it": "^10.0.0",
     "sweetalert": "^2.1.2",
     "vee-validate": "2.1.5",
     "vue": "^2.6.10",

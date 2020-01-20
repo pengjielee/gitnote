@@ -28,7 +28,6 @@
 
 <script>
 import noteApi from "@/api/note";
-import swal from "sweetalert";
 import NoteUpload from "./Upload.vue";
 import { loadingMixin } from "@/mixins/loading.js";
 
@@ -63,21 +62,22 @@ export default {
         this.images = images;
         this.isShowLoading = false;
       } catch (error) {
-        swal("出错了", error.message, "error");
+        this.$swal("出错了", error.message, "error");
         this.isShowLoading = false;
       }
     },
     handleCopy(image, type) {
+      const self = this;
       var content = image.download_url;
       if (type === "md") {
         content = `![](${content})`;
       }
-      this.$copyText(content).then(
+      self.$copyText(content).then(
         function() {
-          swal("复制成功", "已复制到剪贴板", "success");
+          self.$swal("复制成功", "已复制到剪贴板", "success");
         },
         function() {
-          swal("复制失败", "", "error");
+          self.$swal("复制失败", "", "error");
         }
       );
     }

@@ -7457,6 +7457,11 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweetalert2@9.x:
+  version "9.6.0"
+  resolved "https://registry.npm.taobao.org/sweetalert2/download/sweetalert2-9.6.0.tgz#f6bf966b86a88669dce649595588661c2c8e9ae7"
+  integrity sha1-9r+Wa4aohmnc5klZVYhmHCyOmuc=
+
 sweetalert@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/sweetalert/download/sweetalert-2.1.2.tgz#010baaa80d0dbdc86f96bfcaa96b490728594b79"
@@ -7987,6 +7992,13 @@ vue-style-loader@^4.1.0:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
+
+vue-sweetalert2@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npm.taobao.org/vue-sweetalert2/download/vue-sweetalert2-3.0.1.tgz#0fd91795c9db454083579f7c98b11c47b2dded9c"
+  integrity sha1-D9kXlcnbRUCDV598mLEcR7Ld7Zw=
+  dependencies:
+    sweetalert2 "9.x"
 
 vue-template-compiler@^2.6.10:
   version "2.6.11"

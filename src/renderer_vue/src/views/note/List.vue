@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import swal from "sweetalert";
 import noteApi from "@/api/note";
 import { loadingMixin } from "@/mixins/loading.js";
 
@@ -115,7 +114,7 @@ export default {
         this.isShowLoading = false;
         this.notes = oldNotes.concat(newNotes);
       } catch (error) {
-        swal("出错了", error.message, "error");
+        this.$swal("出错了", error.message, "error");
       }
     }
   },

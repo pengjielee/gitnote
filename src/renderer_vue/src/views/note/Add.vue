@@ -36,7 +36,6 @@
 
 <script>
 import noteApi from "@/api/note";
-import swal from "sweetalert";
 
 export default {
   name: "NoteAdd",
@@ -57,10 +56,10 @@ export default {
       try {
         const res = await noteApi.addNote(note, config);
         if (res.status === 201) {
-          swal("添加成功", "", "success");
+          this.$swal("添加成功", "", "success");
         }
       } catch (error) {
-        swal("出错了", error.message, "error");
+        this.$swal("出错了", error.message, "error");
       }
     },
     handleBack() {

@@ -29,7 +29,6 @@
 
 <script>
 import noteApi from "@/api/note";
-import swal from "sweetalert";
 import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
@@ -47,7 +46,7 @@ export default {
       const res = await noteApi.getDetail(number, config);
       this.note = res.data;
     } catch (error) {
-      swal("出错了", error.message, "error");
+      this.$swal("出错了", error.message, "error");
     }
   },
   methods: {

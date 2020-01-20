@@ -238,15 +238,15 @@ body {
 .swal-footer{
   text-align: center;
 }
-.swal-footer .swal-button{
-  background: linear-gradient(to right, #ff7d27, #fd5925);
+.swal-footer .swal-button,.swal2-actions .swal2-confirm{
+  background: linear-gradient(to right, #ff7d27, #fd5925) !important;
   color: #fff;
   outline: none;
 }
-.swal-button:focus{
+.swal-button:focus,.swal2-confirm:focus{
   box-shadow: none;
 }
-.swal-button:not([disabled]):hover{
+.swal-button:not([disabled]):hover,.swal2-confirm:not([disabled]):hover{
   background: #fd5925;
 }
 

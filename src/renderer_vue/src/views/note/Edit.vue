@@ -36,7 +36,6 @@
 
 <script>
 import noteApi from "@/api/note";
-import swal from "sweetalert";
 import { loadingMixin } from "@/mixins/loading.js";
 
 export default {
@@ -59,7 +58,7 @@ export default {
       this.note = { title: data.title, body: data.body, labels: labels };
       this.isShowLoading = false;
     } catch (error) {
-      swal("出错了", error.message, "error");
+      this.$swal("出错了", error.message, "error");
     }
   },
   methods: {
@@ -80,10 +79,10 @@ export default {
       try {
         const res = await noteApi.editNote(number, note, config);
         if (res.status === 200) {
-          swal("保存成功", "", "success");
+          this.$swal("保存成功", "", "success");
         }
       } catch (error) {
-        swal("出错了", error.message, "error");
+        this.$swal("出错了", error.message, "error");
       }
     },
     handleBack() {

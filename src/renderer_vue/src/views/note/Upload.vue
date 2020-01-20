@@ -15,7 +15,6 @@
 
 <script>
 import noteApi from "@/api/note";
-import swal from "sweetalert";
 
 const toDataURL = blob => {
   return new Promise(function(resolve, reject) {
@@ -53,11 +52,11 @@ export default {
           );
 
           if (res.status === 201) {
-            swal("上传成功", "", "success");
+            self.$swal("上传成功", "", "success");
             self.$emit("uploadSuccess");
           }
         } catch (error) {
-          swal("出错了", error.message, "error");
+          self.$swal("出错了", error.message, "error");
         }
       });
     },

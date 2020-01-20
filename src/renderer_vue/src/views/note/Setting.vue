@@ -52,8 +52,6 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-
 export default {
   name: "Setting",
   created: function() {
@@ -76,9 +74,9 @@ export default {
         }
         window.localForage.setItem("config", this.config, function(err) {
           if (err) {
-            swal("保存失败", "", "error");
+            self.$swal("保存失败", "", "error");
           } else {
-            swal("保存成功", "", "success").then(function() {
+            self.$swal("保存成功", "", "success").then(function() {
               self.$router.push("/note/list");
             });
           }

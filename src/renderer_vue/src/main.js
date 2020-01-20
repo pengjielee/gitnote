@@ -10,6 +10,7 @@ import "@/plugins/vue-clipboard.js";
 import "@/plugins/vue-sweetalert2.js";
 
 import "@/assets/css/base.css";
+import "@/assets/semantic-ui/semantic.css";
 import "@/assets/css/note.css";
 
 window.localForage = require("localforage");

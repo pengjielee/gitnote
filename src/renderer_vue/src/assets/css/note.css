@@ -9,6 +9,9 @@
 /*.note-list .item:last-child{
   border-bottom: none;
 }*/
+.note-list .page-header{
+  padding-bottom: 20px;
+}
 .note-list .title {
   font-size: 16px;
   font-weight: bold;
@@ -36,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px 0 15px;
+  margin: 15px 0;
 }
 .note-list .load-more .btn{
   width: 300px;
@@ -70,7 +73,6 @@
   word-break: break-all;
   background: #eff1f5;
   margin: 10px 0;
-  overflow: scroll;
 }
 .note-detail .date{
   font-size: 14px;

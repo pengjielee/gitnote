@@ -1,12 +1,14 @@
 <template>
   <div class="page note-list">
     <div class="page-header">
-      <button class="btn btn-new" @click="handleNew">
-        新建笔记
-      </button>
-      <button class="btn btn-sort" @click="handleSort">
-        {{ directionName }}排列
-      </button>
+      <div class="ui buttons">
+        <button class="ui primary button" @click="handleNew">
+          新建笔记
+        </button>
+        <button class="ui positive button" @click="handleSort">
+          {{ directionName }}排列
+        </button>
+      </div>
     </div>
     <div class="list">
       <ul>
@@ -28,7 +30,7 @@
         <Loading />
       </template>
       <div class="load-more">
-        <button class="btn" @click="handleLoad" v-if="!isLoadOver">
+        <button class="ui button" @click="handleLoad" v-if="!isLoadOver">
           加载更多
         </button>
         <p class="info" v-else>没有更多了</p>

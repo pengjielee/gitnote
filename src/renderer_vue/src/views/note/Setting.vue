@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" @click="handleSave">保存</button>
+      <button class="ui primary button" @click="handleSave">保存</button>
     </div>
   </div>
 </template>

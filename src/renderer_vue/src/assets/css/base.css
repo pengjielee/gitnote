@@ -16,6 +16,7 @@ body {
   font-size: 16px;
 }
 
+
 .btn {
   display: inline-block;
   background: #ededed;
@@ -203,6 +204,7 @@ body {
   outline: none;
   font-size: 14px;
   resize: vertical;
+  border: 1px solid #ccc;
 }
 .form-group .form-area {
   /*height: calc(100% - 50px);*/

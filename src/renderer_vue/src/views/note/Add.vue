@@ -1,55 +1,68 @@
 <template>
   <div class="note-edit">
-    <div class="form-group">
-      <div class="">
-        <input
-          type="text"
-          class="form-input"
-          v-model="note.title"
-          placeholder="请输入标题"
-          name="title"
-          v-validate="'required'"
-        />
-        <div v-show="errors.has('title')" class="form-error">
-          {{ errors.first("title") }}
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <input-tag
-        placeholder="请输入标签"
-        v-model="note.labels"
-        :limit="limit"
-      ></input-tag>
-    </div>
-    <div class="form-group form-area">
-      <div class="ui pointing menu">
-        <a :class="{ item: true, active: !isPreview }" @click="handleMarkdown">
-          Markdown
-        </a>
-        <a :class="{ item: true, active: isPreview }" @click="handlePreview">
-          预览HTML
-        </a>
-      </div>
-      <div class="ui segment">
-        <div v-if="!isPreview">
-          <textarea
-            class="textarea"
-            v-model="note.body"
-            placeholder="请输入内容"
-          ></textarea>
-        </div>
-        <template v-else>
-          <div class="markdown" v-html="html"></div>
-        </template>
-      </div>
-    </div>
-    <div class="form-group">
+    <header class="page-header">
       <div class="ui buttons">
-        <button class="large ui primary button" @click="handleSave">
+        <button class="ui primary button" @click="handleSave">
           保存
         </button>
-        <button class="large ui button" @click="handleBack">返回</button>
+        <button class="ui button" @click="handleClear">清空</button>
+      </div>
+    </header>
+    <div class="page-body">
+      <div class="form-group">
+        <div class="">
+          <input
+            type="text"
+            class="form-input"
+            v-model="note.title"
+            placeholder="请输入标题"
+            name="title"
+            v-validate="'required'"
+          />
+          <div v-show="errors.has('title')" class="form-error">
+            {{ errors.first("title") }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input-tag
+          placeholder="请输入标签"
+          v-model="note.labels"
+          :limit="limit"
+        ></input-tag>
+      </div>
+      <div class="form-group form-area">
+        <div class="ui pointing menu">
+          <a
+            :class="{ item: true, active: !isPreview }"
+            @click="handleMarkdown"
+          >
+            Markdown
+          </a>
+          <a :class="{ item: true, active: isPreview }" @click="handlePreview">
+            预览HTML
+          </a>
+        </div>
+        <div class="ui segment">
+          <div v-if="!isPreview">
+            <textarea
+              class="textarea"
+              v-model="note.body"
+              placeholder="请输入内容"
+            ></textarea>
+          </div>
+          <template v-else>
+            <div class="markdown" v-html="html"></div>
+          </template>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui buttons">
+          <button class="large ui primary button" @click="handleSave">
+            保存
+          </button>
+          <button class="large ui button" @click="handleBack">返回</button>
+        </div>
       </div>
     </div>
   </div>
@@ -87,6 +100,13 @@ export default {
     },
     handleBack() {
       this.$router.back();
+    },
+    handleClear() {
+      this.note = {
+        title: "",
+        body: "",
+        labels: []
+      };
     }
   },
   data() {
@@ -101,3 +121,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.page-header {
+  position: fixed;
+  padding-bottom: 20px;
+  z-index: 1000;
+}
+.page-body {
+  padding-top: 60px;
+}
+</style>

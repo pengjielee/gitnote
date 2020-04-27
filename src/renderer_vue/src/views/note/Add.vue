@@ -75,6 +75,21 @@ import { noteMixin } from "@/mixins/note.js";
 export default {
   name: "NoteAdd",
   mixins: [noteMixin],
+  // created() {
+  //   this.$swal
+  //     .fire({
+  //       position: "top-center",
+  //       icon: "success",
+  //       title: "Your work has been saved",
+  //       showConfirmButton: true,
+  //       timer: 1500
+  //     })
+  //     .then(result => {
+  //       if (result.value) {
+  //         alert(result.value);
+  //       }
+  //     });
+  // },
   methods: {
     async handleSave() {
       const valid = await this.$validator.validate();
@@ -92,7 +107,23 @@ export default {
       try {
         const res = await noteApi.addNote(note, config);
         if (res.status === 201) {
-          this.$swal("添加成功", "", "success");
+          //this.$swal("添加成功", "", "success");
+          this.$swal
+            .fire({
+              position: "top-center",
+              icon: "success",
+              title: "添加成功",
+              showConfirmButton: true
+            })
+            .then(result => {
+              if (result.value) {
+                this.note = {
+                  title: "",
+                  body: "",
+                  labels: []
+                };
+              }
+            });
         }
       } catch (error) {
         this.$swal("出错了", error.message, "error");

@@ -5,17 +5,16 @@
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
-    "start": "export NODE_ENV=development && electron-forge start",
-    "start:prod": "electron-forge start",
+    "dev": "export NODE_ENV=development && electron-forge start",
+    "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "publish": "electron-forge publish"
   },
   "keywords": [],
   "author": {
-    "name": "Frieda Li",
-    "email": "friedali@shijiebang.net"
+    "name": "pengjielee",
+    "email": "386276251@qq.com"
   },
   "license": "MIT",
   "config": {

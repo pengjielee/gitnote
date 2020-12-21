@@ -4,6 +4,16 @@
       <Loading height="300" />
     </template>
     <template v-else>
+      <div class="page-header">
+        <div class="ui buttons">
+          <button class="ui primary button" @click="handleSave">
+            保存
+          </button>
+          <button class="ui positive button" @click="handleBack">
+            返回
+          </button>
+        </div>
+      </div>
       <div class="form-group">
         <input
           class="form-input"
@@ -48,7 +58,7 @@
           </template>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group hidden">
         <div class="ui buttons">
           <button class="large ui primary button" @click="handleSave">
             保存

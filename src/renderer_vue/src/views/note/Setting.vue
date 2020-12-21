@@ -31,6 +31,9 @@
       <div v-show="errors.has('token')" class="form-error">
         {{ errors.first("token") }}
       </div>
+      <div @click="handleOpen" style="margin-top: 5px;">
+        如何生成token
+      </div>
     </div>
     <div class="form-group">
       <div class="form-label"><label>每页显示几条</label></div>
@@ -46,9 +49,12 @@
       </div>
     </div>
     <div class="form-group">
-      <button class="fluid large ui primary button" @click="handleSave">
-        保存
-      </button>
+      <div class="ui buttons">
+        <button class="large ui primary button" @click="handleSave">
+          保存
+        </button>
+        <button class="large ui button" @click="handleReset">重置</button>
+      </div>
     </div>
   </div>
 </template>
@@ -84,6 +90,19 @@ export default {
           }
         });
       });
+    },
+    handleReset() {
+      window.localForage.setItem("config", "");
+      this.config = {
+        repo: "",
+        token: "",
+        size: 30
+      };
+    },
+    handleOpen() {
+      window.open(
+        "https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token"
+      );
     }
   },
   data() {

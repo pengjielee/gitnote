@@ -90,6 +90,12 @@
   width: 100%;
   padding: 10px 0;
 }
+.note-edit .textarea {
+  height: 100vh;
+}
+.note-edit .page-header {
+  margin-bottom: 10px;
+}
 
 .note-tags .tags .tag {
   padding: 5px 10px;
